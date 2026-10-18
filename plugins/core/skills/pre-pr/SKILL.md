@@ -1,6 +1,6 @@
 ---
 name: pre-pr
-description: Judgment checks to run before the user opens a PR from a feature branch: README freshness, API doc accuracy, backlog statuses, diagram currency. Use when work is ready for review or when asked to prepare, finalize or check a branch for a PR.
+description: "Judgment checks to run before the user opens a PR from a feature branch (README freshness, API doc accuracy, backlog statuses, diagram currency). Use when work is ready for review or when asked to prepare, finalize or check a branch for a PR."
 ---
 <!--
 Enforces: the checks a linter cannot make. Do the docs still match the code? Is the
