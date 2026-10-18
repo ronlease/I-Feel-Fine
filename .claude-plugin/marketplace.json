@@ -1,0 +1,17 @@
+{
+  "name": "i-feel-fine",
+  "owner": { "name": "Ron Lease" },
+  "metadata": { "description": "Guardrails, agents and skills for working with Claude Code, packaged as plugins." },
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "Works on any stack: branch guard, backlog and PR skills, implementer and reviewer agents."
+    },
+    {
+      "name": "dotnet-angular",
+      "source": "./plugins/dotnet-angular",
+      "description": "For dotnet, EF Core, npm and prettier repos: format on edit, build check on stop, path and migration guards."
+    }
+  ]
+}
