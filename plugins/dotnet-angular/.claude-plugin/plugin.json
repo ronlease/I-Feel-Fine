@@ -1,0 +1,8 @@
+{
+  "name": "dotnet-angular",
+  "version": "0.1.0",
+  "description": "Hooks and skills for dotnet, EF Core and Angular (npm, prettier) repositories.",
+  "author": { "name": "Ron Lease" },
+  "repository": "https://github.com/ronlease/I-Feel-Fine",
+  "license": "MIT"
+}

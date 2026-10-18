@@ -1,0 +1,7 @@
+{
+  "protectedPaths": [
+    { "glob": "docs/diagrams/*.png", "message": "Rendered image. Edit the .puml source and rerender." },
+    { "glob": "private.csv", "message": "Private dataset. Never edited or committed." }
+  ],
+  "stopVerifyTimeoutSeconds": 25
+}

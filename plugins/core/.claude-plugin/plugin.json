@@ -1,0 +1,8 @@
+{
+  "name": "core",
+  "version": "0.1.0",
+  "description": "Stack-neutral guardrails, agents and skills for Claude Code.",
+  "author": { "name": "Ron Lease" },
+  "repository": "https://github.com/ronlease/I-Feel-Fine",
+  "license": "MIT"
+}

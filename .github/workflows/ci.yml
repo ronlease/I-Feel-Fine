@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # shellcheck over every shell script, the same files the tests exercise.
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run shellcheck
+        run: shellcheck plugins/*/hooks/*.sh tests/run.sh
+
+  # Every JSON file must parse, and the shared helper must match in both plugins.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JSON syntax
+        run: |
+          find . -name '*.json' -not -path './.git/*' -print0 | while IFS= read -r -d '' file; do
+            echo "checking $file"
+            jq empty "$file"
+          done
+      - name: Check lib.sh copies match
+        run: diff plugins/core/hooks/lib.sh plugins/dotnet-angular/hooks/lib.sh
+
+  # Hook tests on Linux and on macOS, whose bash is version 3.2 and whose tools are BSD flavored.
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run hook tests
+        run: bash tests/run.sh
