@@ -31,9 +31,10 @@ read_input() {
   INPUT="$(cat)"
 }
 
+# jq on Windows ends lines with CRLF, so each jq call below pipes through tr to drop the CR.
 # Print a field of the hook input, e.g. json_get tool_input.command. Empty when absent.
 json_get() {
-  jq -r ".${1} // empty" <<<"$INPUT" 2>/dev/null || true
+  jq -r ".${1} // empty" <<<"$INPUT" 2>/dev/null | tr -d '\r'
 }
 
 # Print a config value, or the default when the file, key or jq is missing or broken.
@@ -41,7 +42,7 @@ json_get() {
 cfg_get() {
   local value=""
   if [[ -f "$CONFIG_FILE" ]]; then
-    value="$(jq -r --arg k "$1" '.[$k] // empty | if type == "string" or type == "number" then tostring else empty end' "$CONFIG_FILE" 2>/dev/null || true)"
+    value="$(jq -r --arg k "$1" '.[$k] // empty | if type == "string" or type == "number" then tostring else empty end' "$CONFIG_FILE" 2>/dev/null | tr -d '\r')"
   fi
   if [[ -n "$value" ]]; then
     printf '%s\n' "$value"
@@ -57,7 +58,7 @@ cfg_protected_paths() {
   jq -r '(.protectedPaths // [])
          | if type == "array" then .[] else empty end
          | select(type == "object" and (.glob | type == "string"))
-         | [.glob, (.message // "protected path")] | @tsv' "$CONFIG_FILE" 2>/dev/null || true
+         | [.glob, (.message // "protected path")] | @tsv' "$CONFIG_FILE" 2>/dev/null | tr -d '\r'
 }
 
 # Lowercase a string. Replaces the bash 4 "${var,,}".
@@ -67,7 +68,7 @@ lower() {
 
 # Turn backslashes into slashes and "C:/x" into "/c/x" so Windows and Git Bash paths compare.
 unixify_path() {
-  local p="${1//\//}"
+  local p="${1//\\//}"
   if [[ "$p" =~ ^([A-Za-z]):/(.*)$ ]]; then
     p="/$(lower "${BASH_REMATCH[1]}")/${BASH_REMATCH[2]}"
   fi
