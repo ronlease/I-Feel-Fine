@@ -1,0 +1,12 @@
+{
+  "backlogDir": "docs/backlog",
+  "backlogPrefix": "BL",
+  "solution": "MySolution.slnx",
+  "webDir": "src/MyApp.Web",
+  "protectedPaths": [
+    { "glob": "docs/diagrams/*.png", "message": "Rendered image. Edit the .puml source and rerender." },
+    { "glob": "private-dataset.csv", "message": "Never edited or committed." }
+  ],
+  "renderC4Script": "./scripts/render-diagrams.sh",
+  "stopVerifyTimeoutSeconds": 25
+}

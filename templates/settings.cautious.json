@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git switch:*)",
+      "Bash(git checkout:*)",
+      "Bash(dotnet ef database update:*)",
+      "Bash(dotnet ef migrations remove:*)",
+      "Bash(npm install:*)",
+      "Bash(docker compose down:*)"
+    ],
+    "deny": [
+      "Read(**/node_modules/**)",
+      "Read(**/bin/**)",
+      "Read(**/obj/**)",
+      "Read(**/coverage/**)",
+      "Read(**/package-lock.json)",
+      "Read(**/Migrations/*.Designer.cs)",
+      "Read(**/.env)",
+      "Read(**/*.pfx)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "i-feel-fine": {
+      "source": { "source": "github", "repo": "ronlease/I-Feel-Fine" }
+    }
+  },
+  "enabledPlugins": {
+    "core@i-feel-fine": true,
+    "dotnet-angular@i-feel-fine": true
+  }
+}
