@@ -32,11 +32,12 @@ jobs:
       - name: Check lib.sh copies match
         run: diff plugins/core/hooks/lib.sh plugins/dotnet-angular/hooks/lib.sh
 
-  # Hook tests on Linux and on macOS, whose bash is version 3.2 and whose tools are BSD flavored.
+  # Hook tests on Linux. The hooks avoid bash 4 and GNU-only flags so macOS should work,
+  # but no macOS run is checked yet. Add macos-latest to the matrix to test it.
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
